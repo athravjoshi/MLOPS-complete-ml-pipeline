@@ -5,3 +5,5 @@ pyyaml
 matplotlib
 seaborn
 pytest
+pytest-cov
+flake8
