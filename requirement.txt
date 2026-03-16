@@ -7,3 +7,4 @@ seaborn
 pytest
 pytest-cov
 flake8
+nltk==3.8.1

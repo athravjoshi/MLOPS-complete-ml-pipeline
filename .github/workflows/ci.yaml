@@ -28,8 +28,4 @@ jobs:
 
       - name: run test with coverage
         run: |
-          pytest --cov=. --cov-fail-under=85
-      
-      - name: Run tests
-        run: |
-          pytest test/
+          pytest test/ --cov=src --cov-report=term-missing --cov-fail-under=85
