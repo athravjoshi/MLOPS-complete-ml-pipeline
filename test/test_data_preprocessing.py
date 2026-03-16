@@ -18,13 +18,18 @@ with patch("nltk.download", return_value=True):
 
 
 def test_transform_text_success():
+    class _StopwordsStub:
+        @staticmethod
+        def words(_lang):
+            return ["this", "is"]
+
     with patch.object(
         data_preprocessing.nltk,
         "word_tokenize",
         return_value=["hello", ",", "this", "is", "running", "123", "!"],
     ):
         with patch.object(
-            data_preprocessing.stopwords, "words", return_value=["this", "is"]
+            data_preprocessing, "stopwords", new=_StopwordsStub
         ):
             transformed = data_preprocessing.transform_text(
                 "Hello this is running 123!"
