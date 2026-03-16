@@ -34,10 +34,11 @@ def load_params(params_path: str) -> dict:
     try:
         with open(params_path, "r") as file:
             params = yaml.safe_load(file)
-        # yaml.safe_load returns None for empty files — normalize to an empty dict
+        # Normalize an empty YAML file to a validation error.
         if params is None:
             logger.error(
-                "Parameters file %s is empty or did not contain a mapping", params_path
+                "Parameters file %s is empty or did not contain a mapping",
+                params_path,
             )
             raise ValueError(f"Parameters file {params_path} is empty or invalid")
         if not isinstance(params, dict):
@@ -106,7 +107,7 @@ def save_data(
 def main():
     try:
         params = load_params(params_path="params.yaml")
-        # Safely fetch test_size with a sensible default if the YAML is missing the key
+        # Use a safe default when test_size is missing in params.
         test_size = params.get("data_ingestion", {}).get("test_size", 0.2)
         data_path = "C:\\Users\\gkc\\Documents\\Bandicam\\spam.csv"
         df = load_data(data_url=data_path)

@@ -17,7 +17,8 @@ if SRC_PATH not in sys.path:
     sys.path.insert(0, SRC_PATH)
 
 
-# Provide a minimal dvclive module so import works even if dvclive is not installed.
+# Provide a minimal dvclive module so import works even if dvclive
+# is not installed.
 if "dvclive" not in sys.modules:
     dvclive_stub = types.ModuleType("dvclive")
 

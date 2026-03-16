@@ -1,21 +1,24 @@
+import importlib
+import os
+import sys
+from unittest.mock import mock_open, patch
+
 import pytest
 import pandas as pd
 import yaml
-from unittest.mock import patch, mock_open
-import os
-import sys
 
 
-# Add the src directory to the path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "../src"))
+# Add the src directory to the path.
+SRC_PATH = os.path.join(os.path.dirname(__file__), "../src")
+if SRC_PATH not in sys.path:
+    sys.path.insert(0, SRC_PATH)
 
-from data_ingestion import (
-    load_params,
-    load_data,
-    preprocess_data,
-    save_data,
-    main,
-)
+data_ingestion = importlib.import_module("data_ingestion")
+load_params = data_ingestion.load_params
+load_data = data_ingestion.load_data
+preprocess_data = data_ingestion.preprocess_data
+save_data = data_ingestion.save_data
+main = data_ingestion.main
 
 
 class TestLoadParams:
@@ -193,7 +196,8 @@ class TestMain:
 
         with patch("data_ingestion.load_params", return_value=mock_params):
             with patch(
-                "data_ingestion.load_data", side_effect=Exception("Data load error")
+                "data_ingestion.load_data",
+                side_effect=Exception("Data load error"),
             ):
                 with patch("builtins.print"):
                     main()
@@ -229,7 +233,8 @@ class TestMain:
             with patch("data_ingestion.load_data", return_value=mock_df):
                 with patch("data_ingestion.preprocess_data", return_value=mock_df):
                     with patch(
-                        "data_ingestion.save_data", side_effect=Exception("Save error")
+                        "data_ingestion.save_data",
+                        side_effect=Exception("Save error"),
                     ):
                         with patch("builtins.print"):
                             main()

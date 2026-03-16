@@ -88,7 +88,8 @@ def train_model(
 
         logger.debug("Initializing RandomForest model with parameters: %s", params)
         clf = RandomForestClassifier(
-            n_estimators=params["n_estimators"], random_state=params["random_state"]
+            n_estimators=params["n_estimators"],
+            random_state=params["random_state"],
         )
 
         logger.debug("Model training started with %d samples", X_train.shape[0])

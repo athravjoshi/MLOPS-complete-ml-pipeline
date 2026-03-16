@@ -123,10 +123,14 @@ def test_main_success():
 
     with patch.object(feature_engineering, "load_params", return_value=params):
         with patch.object(
-            feature_engineering, "load_data", side_effect=[train_data, test_data]
+            feature_engineering,
+            "load_data",
+            side_effect=[train_data, test_data],
         ):
             with patch.object(
-                feature_engineering, "apply_tfidf", return_value=(train_df, test_df)
+                feature_engineering,
+                "apply_tfidf",
+                return_value=(train_df, test_df),
             ):
                 with patch.object(feature_engineering, "save_data") as mock_save_data:
                     feature_engineering.main()

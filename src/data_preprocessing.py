@@ -35,7 +35,8 @@ logger.addHandler(file_handler)
 
 def transform_text(text):
     """
-    Transforms the input text by converting it to lowercase, tokenizing, removing stopwords and punctuation, and stemming.
+    Transform input text by lowercasing, tokenizing, removing stopwords
+    and punctuation, then stemming.
     """
     ps = PorterStemmer()
     # Convert to lowercase
@@ -58,7 +59,8 @@ def transform_text(text):
 
 def preprocess_df(df, text_column="text", target_column="target"):
     """
-    Preprocesses the DataFrame by encoding the target column, removing duplicates, and transforming the text column.
+    Preprocess a DataFrame by encoding the target, removing duplicates,
+    and transforming the text column.
     """
     try:
         logger.debug("Starting preprocessing for DataFrame")
